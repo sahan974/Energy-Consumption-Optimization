@@ -7,3 +7,6 @@ predict_man_explicit.py
 
 # Database files
 *.db
+
+#.idea folder
+.idea
