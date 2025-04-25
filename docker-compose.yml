@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  flink-jobmanager:
+    image: apache/flink:1.17.1-scala_2.12-java11
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
+    ports:
+      - "8082:8081" # Flink Web UI
+    command: jobmanager
+    networks:
+      - flink-net
+
+  flink-taskmanager:
+    image: apache/flink:1.17.1-scala_2.12-java11
+    environment:
+      - JOB_MANAGER_RPC_ADDRESS=flink-jobmanager
+    networks:
+      - flink-net
+
+networks:
+  flink-net:
+    driver: bridge

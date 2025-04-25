@@ -41,5 +41,7 @@ def delete_all_values():
 
 # delete_all_values()
 # delete_from_historical_energy_readings()
-delete_from_predictions()
-delete_from_scheduled_tasks()
+# delete_from_predictions()
+# delete_from_scheduled_tasks()
+# delete_from_real_time_energy_readings()
+# delete_from_devices()

@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS devices (
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS real_time_energy_readings (
     switch_id TEXT NOT NULL,
-    timestamp TEXT NOT NULL,
+    timestamp TIMESTAMP(3),   -- Specify timestamp data type with precision (optional)
     power_consumption REAL NOT NULL,
     PRIMARY KEY (switch_id, timestamp),
     FOREIGN KEY (switch_id) REFERENCES devices(switch_id)
