@@ -57,6 +57,22 @@ CREATE TABLE IF NOT EXISTS scheduled_tasks (
 )
 """)
 
+# Create 'anomalies' table
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS anomalies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    switch_id TEXT NOT NULL,
+    device_name TEXT NOT NULL,
+    location TEXT NOT NULL,
+    timestamp TEXT NOT NULL,
+    power_consumption REAL NOT NULL,
+    max_power_rating REAL NOT NULL,
+    excess REAL NOT NULL,
+    FOREIGN KEY (switch_id) REFERENCES devices(switch_id)
+)
+""")
+
+
 
 conn.commit()
 conn.close()

@@ -40,21 +40,21 @@ def realistic_power(device_type):
 def anomaly_value(device_type):
     # Slightly randomized upper limits for each device
     anomaly_ranges = {
-        "AC": (750, 900),
+        "AC": (300, 700),
         "Microwave": (1300, 1600),
-        "Refrigerator": (250, 400),
+        "Refrigerator": (100, 200),
         "Dishwasher": (1400, 1800),
         "Smart Plug": (250, 400),
-        "Washing Machine": (1600, 2000),
-        "TV": (180, 300),
+        "Washing Machine": (300, 1500),
+        "TV": (70, 150),
         "Light": (120, 200)
     }
     default_range = (400, 600)
     return round(random.uniform(*anomaly_ranges.get(device_type, default_range)), 2)
 
 
-# Inject 5% anomalies
-anomaly_count = int(0.05 * len(timestamps) * len(devices))
+# Inject 1% anomalies
+anomaly_count = int(0.01 * len(timestamps) * len(devices))
 anomaly_indices = set(random.sample(range(len(timestamps) * len(devices)), anomaly_count))
 
 print(f"Injecting {anomaly_count} anomalies...")

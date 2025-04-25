@@ -32,6 +32,12 @@ def delete_from_scheduled_tasks():
         conn.commit()
         print("✅ Cleared values from 'scheduled_tasks' table.")
 
+def delete_from_anomalies():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute("DELETE FROM anomalies")
+        conn.commit()
+        print("✅ Cleared values from 'anomalies' table.")
+
 def delete_all_values():
     delete_from_devices()
     delete_from_real_time_energy_readings()
@@ -43,5 +49,6 @@ def delete_all_values():
 # delete_from_historical_energy_readings()
 # delete_from_predictions()
 # delete_from_scheduled_tasks()
-# delete_from_real_time_energy_readings()
+delete_from_real_time_energy_readings()
 # delete_from_devices()
+delete_from_anomalies()
