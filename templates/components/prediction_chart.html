@@ -1,72 +1,3 @@
-<!--<div class="chart-container">-->
-<!--    <canvas id="predictionChart"></canvas>-->
-<!--</div>-->
-
-<!--<script>-->
-<!--    // Fetch prediction data when page loads-->
-<!--    document.addEventListener('DOMContentLoaded', function() {-->
-<!--        fetchPredictions();-->
-<!--    });-->
-
-<!--    function fetchPredictions() {-->
-<!--        fetch('/predictions/today')-->
-<!--            .then(response => response.json())-->
-<!--            .then(data => {-->
-<!--                renderPredictionChart(data);-->
-<!--            })-->
-<!--            .catch(error => console.error('Error loading predictions:', error));-->
-<!--    }-->
-
-<!--    function renderPredictionChart(data) {-->
-<!--        const labels = data.map(item => {-->
-<!--            const date = new Date(item.timestamp);-->
-<!--            return date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });-->
-<!--        });-->
-
-<!--        const values = data.map(item => item.power_consumption);-->
-
-<!--        const ctx = document.getElementById('predictionChart').getContext('2d');-->
-<!--        const chart = new Chart(ctx, {-->
-<!--            type: 'line',-->
-<!--            data: {-->
-<!--                labels: labels,-->
-<!--                datasets: [{-->
-<!--                    label: 'Predicted Power Consumption (W)',-->
-<!--                    data: values,-->
-<!--                    backgroundColor: 'rgba(54, 162, 235, 0.2)',-->
-<!--                    borderColor: 'rgba(54, 162, 235, 1)',-->
-<!--                    borderWidth: 1,-->
-<!--                    tension: 0.4-->
-<!--                }]-->
-<!--            },-->
-<!--            options: {-->
-<!--                responsive: true,-->
-<!--                maintainAspectRatio: false,-->
-<!--                scales: {-->
-<!--                    y: {-->
-<!--                        beginAtZero: true,-->
-<!--                        title: {-->
-<!--                            display: true,-->
-<!--                            text: 'Power (Watts)'-->
-<!--                        }-->
-<!--                    },-->
-<!--                    x: {-->
-<!--                        title: {-->
-<!--                            display: true,-->
-<!--                            text: 'Time'-->
-<!--                        },-->
-<!--                        ticks: {-->
-<!--                            maxRotation: 45,-->
-<!--                            minRotation: 45-->
-<!--                        }-->
-<!--                    }-->
-<!--                }-->
-<!--            }-->
-<!--        });-->
-<!--    }-->
-<!--</script>-->
-
-# Updated templates/components/prediction_chart.html
 <div class="chart-container">
     <canvas id="predictionChart"></canvas>
 </div>
@@ -94,36 +25,6 @@
 
         const values = data.map(item => item.power_consumption);
 
-        // Find min and max values for better y-axis scaling
-        const minValue = Math.floor(Math.min(...values) * 0.95); // 5% lower than minimum
-
-        // Create day separator annotations
-        const annotations = [];
-        let currentDay = null;
-
-        data.forEach((item, index) => {
-            const date = new Date(item.timestamp);
-            const day = date.getDate();
-
-            if (currentDay !== null && day !== currentDay) {
-                annotations.push({
-                    type: 'line',
-                    mode: 'vertical',
-                    scaleID: 'x',
-                    value: index,
-                    borderColor: 'rgba(150, 150, 150, 0.7)',
-                    borderWidth: 1,
-                    borderDash: [5, 5],
-                    label: {
-                        content: `${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`,
-                        enabled: true,
-                        position: 'top'
-                    }
-                });
-            }
-            currentDay = day;
-        });
-
         const ctx = document.getElementById('predictionChart').getContext('2d');
         const chart = new Chart(ctx, {
             type: 'line',
@@ -141,14 +42,9 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                plugins: {
-                    annotation: {
-                        annotations: annotations
-                    }
-                },
                 scales: {
                     y: {
-                        min: minValue, // Start y-axis from calculated minimum value
+                        beginAtZero: true,
                         title: {
                             display: true,
                             text: 'Power (Watts)'
@@ -161,9 +57,7 @@
                         },
                         ticks: {
                             maxRotation: 45,
-                            minRotation: 45,
-                            autoSkip: true,
-                            maxTicksLimit: 24 // Show fewer x-axis labels for clarity
+                            minRotation: 45
                         }
                     }
                 }
