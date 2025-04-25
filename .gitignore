@@ -3,10 +3,14 @@ predict_man_explicit.py
 
 # Directories
 /predictor/
-/energy_consumption_optimizer/
+
 
 # Database files
 *.db
 
 #.idea folder
 .idea
+
+# docker files
+docker-compose.yml
+Dockerfile

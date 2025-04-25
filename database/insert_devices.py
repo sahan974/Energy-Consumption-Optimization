@@ -1,5 +1,6 @@
 # insert_devices.py
 import sqlite3
+import export_devices_to_csv
 
 conn = sqlite3.connect("database2.db")
 cursor = conn.cursor()
@@ -13,7 +14,7 @@ devices = [
     ("dw_01", "Dishwasher", "Kitchen", "Dishwasher", 1500),
     ("sp_01", "SmartPlug1", "Living Room", "Smart Plug", 400),
     ("wm_01", "WashingMachine", "Laundry Room", "Washing Machine", 1500),
-    ("tv_01", "TV", "Living Room", "TV", 130),
+    ("tv_01", "TV", "Living Room", "TV", 150),
     ("lt_01", "Light1", "Living Room", "Light", 100),
     ("lt_02", "Light2", "Kitchen", "Light", 100),
     ("lt_03", "Light3", "Bedroom", "Light", 100),
@@ -29,4 +30,5 @@ VALUES (?, ?, ?, ?, ?)
 
 conn.commit()
 conn.close()
+export_devices_to_csv.export_devices()
 print("✅ Devices inserted successfully")

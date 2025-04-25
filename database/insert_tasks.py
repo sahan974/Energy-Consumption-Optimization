@@ -6,9 +6,7 @@ cursor = conn.cursor()
 
 # Define the tasks to be inserted (washing machine and dishwasher)
 tasks = [
-    ("wm_01", "2025-04-25", None, "not_scheduled"),  # Washing Machine task
-    ("dw_01", "2025-04-26", None, "not_scheduled"),   # Dishwasher task
-    ("wm_01", "2025-04-28", None, "not_scheduled"),  # Washing Machine task
+    ("wm_01", "2025-04-27", None, "not_scheduled"),  # Washing Machine task
     ("dw_01", "2025-04-30", None, "not_scheduled"),   # Dishwasher task
 
 ]

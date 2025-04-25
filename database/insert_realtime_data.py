@@ -2,6 +2,7 @@
 import sqlite3
 import random
 from datetime import datetime, timedelta
+import export_realtime_to_csv
 
 conn = sqlite3.connect("database2.db")
 cursor = conn.cursor()
@@ -78,4 +79,5 @@ for ts in timestamps:
 
 conn.commit()
 conn.close()
+export_realtime_to_csv.export_realtime_data()
 print(f"✅ Realtime data inserted for {len(timestamps)} minutes ({start_date} to {end_date})")

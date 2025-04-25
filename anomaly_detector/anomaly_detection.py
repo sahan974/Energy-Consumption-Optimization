@@ -127,7 +127,7 @@ def main():
         .flat_map(AnomalyDetector(devices_dict))
 
     # Output anomalies to console
-    anomalies.print()
+    # anomalies.print()
 
     # Execute the job
     env.execute("Energy Consumption Anomaly Detection")
